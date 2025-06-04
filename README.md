@@ -1,4 +1,4 @@
-# final-exam-[aimeeastell]
+# Final-Exam-AimeeAstell
 
 # 📝 Task Manager (Intro to Business Programming)
 
