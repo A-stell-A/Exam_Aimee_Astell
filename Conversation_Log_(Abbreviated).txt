@@ -1,20 +1,386 @@
 SECTION 1 - INITIAL PROMPT:
-
+  I need to create a command-line task manager programme in Python for my programming course. The programme should allow users to add, list, and remove tasks stored in memory.
+    Please provide pseudocode that only uses basic Python concepts suitable for my university introductory course in business programming- no advanced features. Follow a structured planning approach with clear steps.
 AI RESPONSE:
+PROBLEM RESTATEMENT:
+      Create a simple command-line task manager program using Python. The program should allow a user to add tasks, list existing tasks, and remove tasks. All tasks are stored in memory (using a list), and the program should continue running until the user chooses to exit. This program must use only basic Python programming concepts suitable for an introductory course.
+    INPUTS:
+      - User's menu choice
+      - Task description
+      - Task number
+    OUTPUTS:
+      - Menu displayed each time
+      - Confirmation messages
+      - List of tasks
+      - Error messages for invalid input or actions
+
+    EXAMPLE WALKTHROUGH:
+    Program displays menu:
+      1. Add task
+      2. List tasks
+      3. Remove task
+      4. Exit
+    User input: 1
+    User enters task: "Finish homework"
+    Program response: "Task added!"
+    User input: 2
+    Program response:
+      Tasks:
+      1. Finish homework
+    User input: 3
+    User enters task number to remove: 1
+    Program response: "Task removed!"
+    User input: 4
+    Program response: "Goodbye!"
+    Program ends
+
+    PSEUDOCODE:
+      Initialize an empty list called tasks
+
+Loop forever:
+    Display menu:
+        1. Add task
+        2. List tasks
+        3. Remove task
+        4. Exit
+    Ask user to enter their choice
+
+    If choice is 1:
+        Ask user to type a task
+        Add the task to the tasks list
+        Print "Task added!"
+
+    Else if choice is 2:
+        If tasks list is empty:
+            Print "No tasks to display"
+        Else:
+            Print all tasks with numbers starting from 1
+
+    Else if choice is 3:
+        If tasks list is empty:
+            Print "No tasks to remove"
+        Else:
+            Show the numbered task list
+            Ask user for the number of the task to remove
+            If number is valid:
+                Remove the task from the list
+                Print "Task removed!"
+            Else:
+                Print "Invalid task number"
+
+    Else if choice is 4:
+        Print "Goodbye!"
+        Exit loop
+
+    Else:
+        Print "Invalid choice. Please try again."
+
+
+    MAIN PROGRAMME:
+     SET tasks TO empty list
+
+LOOP forever
+    DISPLAY menu options to user
+    GET choice from user
+
+    IF choice = 1 THEN
+        GET task_description from user
+        APPEND task_description TO tasks
+        DISPLAY "Task added!"
+
+    ELSE IF choice = 2 THEN
+        IF tasks is empty THEN
+            DISPLAY "No tasks to display"
+        ELSE
+            FOR each task in tasks WITH index starting from 1
+                DISPLAY index and task
+
+    ELSE IF choice = 3 THEN
+        IF tasks is empty THEN
+            DISPLAY "No tasks to remove"
+        ELSE
+            DISPLAY tasks with numbers
+            GET task_number from user
+            IF task_number is valid THEN
+                REMOVE task at task_number - 1 FROM tasks
+                DISPLAY "Task removed!"
+            ELSE
+                DISPLAY "Invalid task number"
+
+    ELSE IF choice = 4 THEN
+        DISPLAY "Goodbye!"
+        BREAK out of loop
+
+    ELSE
+        DISPLAY "Invalid choice. Please try again."
 
 SECTION 1 - FIRST REFINEMENT:
-
+  Please refine the pseudocode to handle user input errors. Add specific error handling messages when letters are inputted instead of numbers and when a number outside of the menu options is inputted.
 AI RESPONSE:
+   SET tasks TO empty list
 
+LOOP forever
+    DISPLAY menu options:
+        1. Add task
+        2. List tasks
+        3. Remove task
+        4. Exit
+
+    GET user_input
+
+    IF user_input is NOT a number THEN
+        DISPLAY "Error: Please enter a number between 1 and 4."
+        CONTINUE loop
+
+    CONVERT user_input TO number and STORE in choice
+
+    IF choice is NOT between 1 and 4 THEN
+        DISPLAY "Error: Invalid menu option. Please choose 1, 2, 3, or 4."
+        CONTINUE loop
+
+    IF choice = 1 THEN
+        GET task_description from user
+        APPEND task_description TO tasks
+        DISPLAY "Task added!"
+
+    ELSE IF choice = 2 THEN
+        IF tasks is empty THEN
+            DISPLAY "No tasks to display"
+        ELSE
+            FOR each task in tasks WITH index starting from 1
+                DISPLAY index and task
+
+    ELSE IF choice = 3 THEN
+        IF tasks is empty THEN
+            DISPLAY "No tasks to remove"
+        ELSE
+            FOR each task in tasks WITH index starting from 1
+                DISPLAY index and task
+
+            GET remove_input from user
+            IF remove_input is NOT a number THEN
+                DISPLAY "Error: Please enter a valid task number."
+                CONTINUE loop
+
+            CONVERT remove_input TO number and STORE in task_number
+
+            IF task_number is NOT between 1 and length of tasks THEN
+                DISPLAY "Error: Task number out of range."
+                CONTINUE loop
+
+            REMOVE task at task_number - 1 FROM tasks
+            DISPLAY "Task removed!"
+
+    ELSE IF choice = 4 THEN
+        DISPLAY "Goodbye!"
+        BREAK out of loop
+
+SECTION 1 - SECOND REFINEMENT:
+  Can you please refine the task manager pseudocode you previously provided to include the following improvements? 1.Trim whitespace and validate task input — Make sure users can't add empty or blank tasks, and strip leading/trailing spaces from the input.
+  2.Confirm task removal before deleting — After the user selects a task to remove, ask for confirmation (e.g. "Are you sure? yes/no") before deleting it.
+  Please keep the solution at a beginner level suitable for an introductory programming course, using only basic Python concepts.
+AI RESPONSE:
+   SET tasks TO empty list
+
+LOOP forever
+    DISPLAY menu options:
+        1. Add task
+        2. List tasks
+        3. Remove task
+        4. Exit
+
+    GET user_input
+
+    IF user_input is NOT a number THEN
+        DISPLAY "Error: Please enter a number between 1 and 4."
+        CONTINUE loop
+
+    CONVERT user_input TO number and STORE in choice
+
+    IF choice is NOT between 1 and 4 THEN
+        DISPLAY "Error: Invalid menu option. Please choose 1, 2, 3, or 4."
+        CONTINUE loop
+
+    IF choice = 1 THEN
+        GET task_description from user
+        REMOVE leading/trailing spaces from task_description
+
+        IF task_description is empty THEN
+            DISPLAY "Error: Task cannot be empty."
+            CONTINUE loop
+
+        APPEND task_description TO tasks
+        DISPLAY "Task added!"
+
+    ELSE IF choice = 2 THEN
+        IF tasks is empty THEN
+            DISPLAY "No tasks to display"
+        ELSE
+            DISPLAY "Your Tasks:"
+            FOR each task in tasks WITH index starting from 1
+                DISPLAY index and task
+            DISPLAY "----------------------"
+
+    ELSE IF choice = 3 THEN
+        IF tasks is empty THEN
+            DISPLAY "No tasks to remove"
+        ELSE
+            DISPLAY "Tasks:"
+            FOR each task in tasks WITH index starting from 1
+                DISPLAY index and task
+
+            GET remove_input from user
+
+            IF remove_input is NOT a number THEN
+                DISPLAY "Error: Please enter a valid task number."
+                CONTINUE loop
+
+            CONVERT remove_input TO number and STORE in task_number
+
+            IF task_number is NOT between 1 and length of tasks THEN
+                DISPLAY "Error: Task number out of range."
+                CONTINUE loop
+
+            DISPLAY the task at task_number
+            DISPLAY "Are you sure you want to remove this task? (yes/no)"
+            GET confirmation from user
+
+            IF confirmation IS NOT "yes" THEN
+                DISPLAY "Task not removed."
+                CONTINUE loop
+
+            REMOVE task at task_number - 1 FROM tasks
+            DISPLAY "Task removed!"
+
+    ELSE IF choice = 4 THEN
+        DISPLAY "Goodbye!"
+        BREAK out of loop
 SECTION 2 - ERROR ANALYSIS:
-
+  Please analyse this chatbot code for a beginner programming student. Identify errors that a student would typically make, focusing on variable names, basic logic flow, and simple programming mistakes.
 AI RESPONSE:
+   Comparing input to numbers without converting
+
+input() gives a text (string), but the code checks if choice == 1 (a number). This will never be true.
+
+Fix: Either convert choice to a number first or compare with "1" (a string).
+
+Not calling the isdigit() method correctly
+
+The code uses task_number.isdigit without parentheses. It should be task_number.isdigit() to check if the input is a number.
+
+Wrong loop range when listing tasks
+
+The loop for i in range(1, len(tasks)) skips the first task and doesn’t show all tasks.
+
+Fix: Use for i in range(len(tasks)) to include all tasks starting from the first.
+
+Deleting the wrong task due to off-by-one error
+
+The user sees tasks numbered from 1, but Python lists start at 0. Deleting tasks[task_number] deletes the wrong item.
+
+Fix: Use del tasks[task_number - 1].
+
+Wrong check for valid task number
+
+The code checks if task_number < 0, but task numbers start at 1.
+
+Fix: Check if task_number < 1.
+
+Not removing spaces from task description properly
+
+task_description.strip() does not change the text unless assigned back.
+
+Fix: Use task_description = task_description.strip().
+
+No check before converting input to number
+
+If the user types letters instead of a number, the program may crash.
+
+Fix: Always check if input is a number with isdigit() before converting.
 
 SECTION 3 - BRAINSTORMING:
-
+  Please provide the corrected version of this code using only basic Python techniques suitable for our introductory course. Include simple error fixes and make sure the conversation history works properly.
 AI RESPONSE:
+   # Start with an empty task list
+tasks = []
 
-SECTION 4 - SYNTAX CHECK:
+# Loop the menu until the user chooses to exit
+while True:
+    print("\nMenu:")
+    print("1. Add task")
+    print("2. List tasks")
+    print("3. Remove task")
+    print("4. Exit")
 
-AI RESPONSE:
+    choice = input("Enter your choice (1-4): ")
+
+    # Check if input is a number
+    if not choice.isdigit():
+        print("Error: Please enter a number.")
+        continue
+
+    choice = int(choice)
+
+    # Check if number is within menu range
+    if choice < 1 or choice > 4:
+        print("Error: Please choose a number between 1 and 4.")
+        continue
+
+    # Add task
+    if choice == 1:
+        task_description = input("Enter task: ")
+        task_description = task_description.strip()
+
+        if task_description == "":
+            print("Error: Task cannot be empty.")
+            continue
+
+        tasks.append(task_description)
+        print("Task added!")
+
+    # List tasks
+    elif choice == 2:
+        if len(tasks) == 0:
+            print("No tasks to display.")
+        else:
+            print("\nYour Tasks:")
+            for i in range(len(tasks)):
+                print(str(i + 1) + ". " + tasks[i])
+
+    # Remove task
+    elif choice == 3:
+        if len(tasks) == 0:
+            print("No tasks to remove.")
+        else:
+            print("\nTasks:")
+            for i in range(len(tasks)):
+                print(str(i + 1) + ". " + tasks[i])
+
+            task_number = input("Enter the number of the task to remove: ")
+
+            if not task_number.isdigit():
+                print("Error: Please enter a valid number.")
+                continue
+
+            task_number = int(task_number)
+
+            if task_number < 1 or task_number > len(tasks):
+                print("Error: Task number out of range.")
+                continue
+
+            print("Are you sure you want to remove this task? (yes/no)")
+            confirm = input().strip().lower()
+
+            if confirm != "yes":
+                print("Task not removed.")
+                continue
+
+            # Remove the selected task
+            del tasks[task_number - 1]
+            print("Task removed!")
+
+    # Exit
+    elif choice == 4:
+        print("Goodbye!")
+        break
 
